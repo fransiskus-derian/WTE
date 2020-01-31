@@ -9,34 +9,10 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import axios from 'axios';
 
-const config = {
-    headers: {'Authorization': 'Bearer @tXL1wN1Q0HWhfFmFKVz8npvGAvpP9FTrkCV00J0m9IGMLKNVwQe1tPDsR7Xmo5ucY4zF1PX7iDzIynF23l0Pav365ZTOunSLP0NxMYKysYjbeNeRYYi4Ykg6mB4dXnYx'},
-    params: {
-      location: 'Corvallis, OR'
-    }
-  };
 
 export default class MainScreen extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoading: true
-        }
-    }
-    
-    UNSAFE_componentWillMount() {
-        }
-    
-    componentDidMount() {
-        axios.get('https://api.yelp.com/v3/businesses/search', config)
-        .then(res=>console.log(res))
-        .then(res=> this.setState({
-            isLoading: false,
-            data:res
-        }));
-    }
+
 
     render() {
         var {navigate} = this.props.navigation;

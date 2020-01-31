@@ -14,6 +14,7 @@ import {
 
 export default class AppetiteScreen extends Component {
     render() {
+        
         var {navigate} = this.props.navigation;
         return (
             <ImageBackground 
