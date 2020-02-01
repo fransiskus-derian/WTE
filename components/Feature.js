@@ -14,15 +14,14 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faThumbsUp, faDice, faStreetView, faDollarSign } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
-
+ 
 const config = {
     headers: {'Authorization': 'Bearer tXL1wN1Q0HWhfFmFKVz8npvGAvpP9FTrkCV00J0m9IGMLKNVwQe1tPDsR7Xmo5ucY4zF1PX7iDzIynF23l0Pav365ZTOunSLP0NxMYKysYjbeNeRYYi4Ykg6mB4dXnYx'},
     params: {
-      location: 'Corvallis, OR',
+      location: "",
       limit: 20
     }
   };
-
 
 export default class FeatureScreen extends Component {
     constructor(props) {
@@ -30,15 +29,17 @@ export default class FeatureScreen extends Component {
         this.state = {
             needLoad: true,
             data: [],
+            loc: '',
         }
     }
     
-    async UNSAFE_componentWillMount() {    
+    async UNSAFE_componentWillMount() {  
+        console.log("will mount")
+        config.params.location = this.props.navigation.getParam('location')
+          
         if (this.state.needLoad){ 
             try {
             await this.fetchData();
-            
-            console.log(this.state.data);
             } catch (err){
 
             }
@@ -53,15 +54,10 @@ export default class FeatureScreen extends Component {
         } ));
     }
 
-    componentDidMount() {
 
-        
-        //.request["_response"]
-        
-        
-    }
     render() {
         console.log("rendered")
+        
         var {navigate} = this.props.navigation;
         return (
             <ImageBackground 

@@ -12,6 +12,8 @@ import {
 
 } from 'react-native';
 
+
+
 import { ListItem } from 'react-native-elements'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faYelp } from '@fortawesome/free-brands-svg-icons'

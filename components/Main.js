@@ -4,27 +4,47 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Button,
+  KeyboardAvoidingView,
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import { TextInput } from 'react-native-paper';
 
 
 export default class MainScreen extends Component {
-
+    state = {
+        input_text: ''
+    }
 
     render() {
         var {navigate} = this.props.navigation;
         return (
+            
             <ImageBackground 
                 source={require('../images/home.png')}
                 style={styles.backgroundImage}
             >
-            <View style={styles.container}>
+            <KeyboardAvoidingView
+            style = {{flex: 1}}
+            behavior="position"
+            >
+            <View style = {styles.input_box}>
+                    <TextInput 
+                        label = 'Input Location'
+                        placeholder='e.g. Western Blvd, corvallis OR' 
+                        value={this.state.input_text}
+                        onChangeText={res => this.setState({input_text: res})}/>
+                        
+                </View>
+            
+
+            <View style={styles.container}>  
+                
                 <View style = {{width: 200, height: 40, backgroundColor:'white', borderRadius: 20}}>
+                
+                
                 <TouchableOpacity 
-                onPress={ () => navigate('Feature', {})}
+                onPress={ () => navigate('Feature', {location: this.state.input_text})}
                 >
                     <Text style={styles.text}>
                         Get Started!
@@ -32,6 +52,7 @@ export default class MainScreen extends Component {
                 </TouchableOpacity>
                 </View>
             </View>
+            </KeyboardAvoidingView>
             </ImageBackground>
         );
     }
@@ -60,7 +81,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'flex-end',
-        marginBottom: 40
+        
+        bottom: -50
+    },
+    input_box: {
+        width: 200,
+        height: 60,
+        marginTop: 350,
+        alignSelf: 'center'
     }
 });
 

@@ -1,0 +1,9 @@
+npm i react-native-paper
+npm install axios
+npm install --save react-navigation
+npm install --save react-navigation-stack
+npm i --save @fortawesome/fontawesome-svg-core
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/react-fontawesome
+npm i --save @fortawesome/free-brands-svg-icons
+npm i --save @fortawesome/free-regular-svg-icons
