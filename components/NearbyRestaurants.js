@@ -29,20 +29,38 @@ export default class NearbyScreen extends Component {
                 source={require('../images/background.png')}
                 style={styles.backgroundImage}
             >
-                <ScrollView>
+                {display_data(data)}
+            </ImageBackground>
+        );
+    }
+}
+
+function display_data(data){
+    if (data.length == 0){
+        return (
+            <View style = {styles.title_not_found}>
+                <Text style={styles.not_found}>OOPS !</Text>
+                <Text style={styles.not_found}>NO RESTAURANT NEARBY</Text>
+            </View>
+            )
+    }
+
+    return (    <ScrollView>
                 <View>
                     {
                         data.map((l, i) =>
                         <ListItem 
                             key = {i}
-                            title = {l.name}
-                            subtitle = {l.location.address1 + ", " + l.location.city 
-                                        + ", " + l.location.state + " " + l.location.zip_code}
+                            title = {<Text style = {{fontSize: 14}}>{l.name}</Text>}
+                            subtitle = {l.location.address1 + "\n" + l.location.city 
+                                        + ", " + l.location.state + " " + l.location.zip_code + "\n" + l.display_phone 
+                                        + "\n" + l.categories[0].title}
                                         
                             rightTitle = {
                                 <View> 
                                     {display(l.rating)}
-                                    <Text style={{textAlign:'right'}}>{l.price}</Text>
+                                    <Text style={{textAlign:'right', top: -10}}>{l.price}</Text>
+                                    <Text style={{textAlign:'right', top: -10}}>{round_miles(l.distance) } miles</Text>
                                 </View>    
                                     }
                             leftIcon = {<FontAwesomeIcon icon = {faYelp}/>}
@@ -54,21 +72,15 @@ export default class NearbyScreen extends Component {
                     }
                 </View>
                 </ScrollView>
-
-            </ImageBackground>
-        );
-    }
+    )
+    
+    
 }
 
-const styles = StyleSheet.create({
-    backgroundImage: {
-        flex: 1,
-        width: null,
-        height: null,
-        resizeMode: 'cover'
-    },
+function round_miles(num){
+    return Math.round(num/100)/10
 
-});
+}
 
 
 function display(val) {
@@ -104,3 +116,34 @@ function display(val) {
         style={{width:80, resizeMode:'contain'}}></Image>;
     }
 };
+
+function open_now(val) {
+    if (!val){
+        return "Open Now"
+    } else {
+        return "Currently Closed"
+    }
+}
+
+const styles = StyleSheet.create({
+    backgroundImage: {
+        flex: 1,
+        width: null,
+        height: null,
+        resizeMode: 'cover'
+    },
+
+    not_found: {
+        textAlign: 'center',
+        color: 'white',
+        fontSize: 22,
+        fontWeight: "bold",
+        fontFamily: "georgia"
+    },
+    
+    title_not_found: {
+        marginTop: 200,
+    }
+
+});
+

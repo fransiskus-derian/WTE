@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faThumbsUp, faDice, faStreetView } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp, faDice, faStreetView, faDollarSign } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 
 const config = {
@@ -35,9 +35,13 @@ export default class FeatureScreen extends Component {
     
     async UNSAFE_componentWillMount() {    
         if (this.state.needLoad){ 
+            try {
             await this.fetchData();
             
             console.log(this.state.data);
+            } catch (err){
+
+            }
         }
     }
     
@@ -81,7 +85,7 @@ export default class FeatureScreen extends Component {
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
                     <View style = {{width: 300, height: 70, marginTop: 50, backgroundColor:'white', borderRadius: 5}}>
                         <TouchableOpacity 
-                        onPress={ () => navigate('PickForMe', {})}
+                        onPress={ () => navigate('PickForMe', {data: this.state.data})}
                         >
                             <Text style={styles.text}>
                                 <FontAwesomeIcon icon = {faDice}/>
@@ -93,11 +97,11 @@ export default class FeatureScreen extends Component {
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
                     <View style = {{width: 300, height: 70, marginTop: 50, backgroundColor:'white', borderRadius: 5}}>
                         <TouchableOpacity 
-                        onPress={ () => navigate('Appetite', {})}
+                        onPress={ () => navigate('Budget', {data: this.state.data})}
                         >
                             <Text style={styles.text}>
-                                <FontAwesomeIcon icon = {faThumbsUp}/>
-                                My Appetite
+                                <FontAwesomeIcon icon = {faDollarSign}/>
+                                Pick My Budget
                             </Text>
                         </TouchableOpacity>
                     </View>

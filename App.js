@@ -15,14 +15,14 @@ import MainScreen from './components/Main';
 import FeatureScreen from './components/Feature';
 import NearbyScreen from './components/NearbyRestaurants';
 import PickForMeScreen from './components/PickForMe';
-import AppetiteScreen from './components/Appetite';
+import BudgetScreen from './components/Appetite';
 
 const Navigation = createStackNavigator ({
   Home: MainScreen,
   Feature: FeatureScreen,
   Restaurant: NearbyScreen,
   PickForMe: PickForMeScreen,
-  Appetite: AppetiteScreen
+  Budget: BudgetScreen
 })
 
 const AppContainer = createAppContainer(Navigation);
