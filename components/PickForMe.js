@@ -15,7 +15,7 @@ import {
 import { ListItem } from 'react-native-elements'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faYelp } from '@fortawesome/free-brands-svg-icons'
-
+import { faHome } from '@fortawesome/free-solid-svg-icons'
 
 export default class PickForMeScreen extends Component {
 
@@ -28,14 +28,21 @@ export default class PickForMeScreen extends Component {
                 source={require('../images/background_plain.png')}
                 style={styles.backgroundImage}
             >
-                
-                    <View style = {styles.title}>
-                        <TouchableOpacity 
-                        onPress={ () => navigate('PickForMe', {data: data})}
-                        >
-                            <Text style={styles.title_text}>RANDOM ME</Text>
-                        </TouchableOpacity>
-                    </View>
+                <View style = {{top: 10, left: 10, width: '25%', borderRadius: 10, backgroundColor: 'white'}}>
+                    <TouchableOpacity onPress={ () => navigate('Home')}>
+                        <Text style = {{fontSize: 20, textAlign: 'center'}}>
+                            <FontAwesomeIcon icon = {faHome} />
+                            Home
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style = {styles.title}>
+                    <TouchableOpacity 
+                    onPress={ () => navigate('PickForMe', {data: data})}
+                    >
+                        <Text style={styles.title_text}>RANDOM ME</Text>
+                    </TouchableOpacity>
+                </View>
                
 
                 {random_me(data)}
@@ -86,7 +93,6 @@ function randomInteger(min, max) {
 function random_me(data) {
     const temp = []
     const randomed = []
-    console.log(data.length)
     while (data.length > 0 && randomed.length < data.length && randomed.length < 3){
         const ran = randomInteger(0, data.length-1)
         if (randomed.includes(ran)){
@@ -96,7 +102,6 @@ function random_me(data) {
             temp.push(data[ran])
         }
     }
-    console.log(randomed)
 
     if (randomed.length == 0){
         return (
@@ -175,7 +180,7 @@ const styles = StyleSheet.create({
     },
 
     custom_list: {
-        marginTop: 30,
+        marginTop: 20,
     },
 
     not_found: {

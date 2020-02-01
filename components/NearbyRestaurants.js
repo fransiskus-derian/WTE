@@ -8,12 +8,14 @@ import {
   Button,
   ImageBackground,
   TouchableOpacity,
-  Image
+  Image,
+  Picker
 
 } from 'react-native';
 
 import { ListItem } from 'react-native-elements'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { faYelp } from '@fortawesome/free-brands-svg-icons'
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -22,6 +24,24 @@ import { ScrollView } from 'react-native-gesture-handler';
 export default class NearbyScreen extends Component {
     render() {
         const data = this.props.navigation.getParam('data')
+        var type = this.props.navigation.getParam('type')
+        var exec = ''
+        var dropdown = ''
+        if (type == 'default'){
+            exec = data
+        } else if (type == 'sort_distance'){
+            data.sort((a, b) => a.distance > b.distance ? 1 : -1)
+            exec = data
+        }  else if (type == 'sort_price_low'){
+            data.sort((a, b) => a.price.length > b.price.length ? 1 : -1)
+            exec = data
+        }  else if (type == 'sort_price_high'){
+            data.sort((a, b) => a.price.length < b.price.length ? 1 : -1)
+            exec = data
+        }  else if (type == 'sort_rating'){
+            data.sort((a, b) => a.rating < b.rating ? 1 : -1)
+            exec = data
+        } 
         var {navigate} = this.props.navigation;
         return (
             
@@ -29,7 +49,28 @@ export default class NearbyScreen extends Component {
                 source={require('../images/background.png')}
                 style={styles.backgroundImage}
             >
-                {display_data(data)}
+                <View style = {{top: 10, left: 10, width: '25%', borderRadius: 10, backgroundColor: 'white'}}>
+                    <TouchableOpacity onPress={ () => navigate('Home')}>
+                        <Text style = {{fontSize: 20, textAlign: 'center'}}>
+                            <FontAwesomeIcon icon = {faHome} />
+                            Home
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <View style = {styles.display_data}>
+                    <Picker 
+                        selectedValue={dropdown}
+                        style={styles.Picker}
+                        mode = 'dropdown'
+                        onValueChange = {(itemValue, itemIndex) => navigate('Restaurant', {data: data, type:itemValue})} >
+                        <Picker.Item label="Filter Options" value="default"/>
+                        <Picker.Item label="Sort by Distance" value="sort_distance" />
+                        <Picker.Item label="Price: Low to High" value="sort_price_low" />
+                        <Picker.Item label="Price: High to Low" value="sort_price_high" />
+                        <Picker.Item label="Rating: High to Low" value="sort_rating" />
+                    </Picker>
+                    {display_data(exec)}
+                </View>
             </ImageBackground>
         );
     }
@@ -143,6 +184,21 @@ const styles = StyleSheet.create({
     
     title_not_found: {
         marginTop: 200,
+    }, 
+
+    display_data: {
+        top: -5,
+        marginBottom: 0
+    },
+
+    Picker: {
+        width: 160,
+        height: 30,
+        bottom: 10,
+        right: 10,
+        alignSelf: 'flex-end',
+        backgroundColor: 'white'
+        
     }
 
 });

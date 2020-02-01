@@ -72,7 +72,7 @@ export default class FeatureScreen extends Component {
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
                     <View style = {{width: 300, height: 70, marginTop: 100, backgroundColor:'white', borderRadius: 5}}>
                         <TouchableOpacity 
-                        onPress={ () => navigate('Restaurant', {data: this.state.data})}
+                        onPress={ () => navigate('Restaurant', {data: this.state.data, type:"default"})}
                         >
                             
                             <Text style={styles.text}>
