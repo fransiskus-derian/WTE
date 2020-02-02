@@ -4,8 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Button,
+
   ImageBackground,
   TouchableOpacity,
   Image,
@@ -19,8 +18,6 @@ import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { faYelp } from '@fortawesome/free-brands-svg-icons'
 import { ScrollView } from 'react-native-gesture-handler';
 
-
-
 export default class NearbyScreen extends Component {
     render() {
         const data = this.props.navigation.getParam('data')
@@ -33,10 +30,10 @@ export default class NearbyScreen extends Component {
             data.sort((a, b) => a.distance > b.distance ? 1 : -1)
             exec = data
         }  else if (type == 'sort_price_low'){
-            data.sort((a, b) => a.price.length > b.price.length ? 1 : -1)
+            data.sort(price_low_to_high)
             exec = data
         }  else if (type == 'sort_price_high'){
-            data.sort((a, b) => a.price.length < b.price.length ? 1 : -1)
+            data.sort(price_high_to_low)
             exec = data
         }  else if (type == 'sort_rating'){
             data.sort((a, b) => a.rating < b.rating ? 1 : -1)
@@ -77,6 +74,7 @@ export default class NearbyScreen extends Component {
 }
 
 function display_data(data){
+    // List restaurant using list item
     if (data.length == 0){
         return (
             <View style = {styles.title_not_found}>
@@ -158,12 +156,33 @@ function display(val) {
     }
 };
 
+
+// check if restaurant is open
 function open_now(val) {
     if (!val){
         return "Open Now"
     } else {
         return "Currently Closed"
     }
+}
+
+// Sorting function
+function price_low_to_high(a, b) {
+    if (a.price == undefined) return -1;
+    if (b.price == undefined) return  -1;
+    if (a.price.length > b.price.length){
+        return 1
+    };
+    return -1;
+}
+
+function price_high_to_low(a, b) {
+    if (a.price == undefined) return -1;
+    if (b.price == undefined) return  1;
+    if (a.price.length < b.price.length){
+        return 1
+    };
+    return -1;
 }
 
 const styles = StyleSheet.create({

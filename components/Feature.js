@@ -18,13 +18,16 @@ import axios from 'axios';
 const config = {
     headers: {'Authorization': 'Bearer tXL1wN1Q0HWhfFmFKVz8npvGAvpP9FTrkCV00J0m9IGMLKNVwQe1tPDsR7Xmo5ucY4zF1PX7iDzIynF23l0Pav365ZTOunSLP0NxMYKysYjbeNeRYYi4Ykg6mB4dXnYx'},
     params: {
-      location: "",
-      limit: 20
+      location: "corvallis", //defaulted to corvallis
+      limit: 50,
+      //sort_by: 'distance',
+      open_now: false
     }
   };
 
 export default class FeatureScreen extends Component {
     constructor(props) {
+        console.log("constructor")
         super(props);
         this.state = {
             needLoad: true,
@@ -57,7 +60,6 @@ export default class FeatureScreen extends Component {
 
     render() {
         console.log("rendered")
-        
         var {navigate} = this.props.navigation;
         return (
             <ImageBackground 
