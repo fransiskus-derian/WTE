@@ -19,7 +19,7 @@ const config = {
     headers: {'Authorization': 'Bearer tXL1wN1Q0HWhfFmFKVz8npvGAvpP9FTrkCV00J0m9IGMLKNVwQe1tPDsR7Xmo5ucY4zF1PX7iDzIynF23l0Pav365ZTOunSLP0NxMYKysYjbeNeRYYi4Ykg6mB4dXnYx'},
     params: {
       location: "corvallis", //defaulted to corvallis
-      limit: 50,
+      limit: 30,
       //sort_by: 'distance',
       open_now: false
     }

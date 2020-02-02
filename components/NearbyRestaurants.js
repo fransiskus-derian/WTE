@@ -23,10 +23,9 @@ export default class NearbyScreen extends Component {
     render() {
         const data = this.props.navigation.getParam('data')
         let type = this.props.navigation.getParam('type')
-        let exec = ''
+        let exec = sorting_attr(type, data)
         let dropdown = ''
         
-        exec = sorting_attr(type, data)
         
         let {navigate} = this.props.navigation;
         return (
