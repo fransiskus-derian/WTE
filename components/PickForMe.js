@@ -12,8 +12,6 @@ import {
 
 } from 'react-native';
 
-
-
 import { ListItem } from 'react-native-elements'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faYelp } from '@fortawesome/free-brands-svg-icons'
@@ -47,7 +45,7 @@ export default class PickForMeScreen extends Component {
                 </View>
                
 
-                {random_me(data)}
+                {random_me(data, navigate)}
 
             </ImageBackground>
         );
@@ -92,7 +90,7 @@ function randomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-function random_me(data) {
+function random_me(data, navigate) {
     const temp = []
     const randomed = []
     while (data.length > 0 && randomed.length < data.length && randomed.length < 3){
@@ -115,7 +113,7 @@ function random_me(data) {
     return (<View style={styles.custom_list}>
         {
             temp.map((l, i) =>
-            <ListItem 
+            <ListItem onPress={ () => navigate('Product', {data: l})}
                 key = {i}
                 title = {
                     <Text style = {{fontSize: 14}}>{l.name}</Text>}

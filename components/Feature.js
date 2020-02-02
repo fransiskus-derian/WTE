@@ -27,7 +27,7 @@ const config = {
 
 export default class FeatureScreen extends Component {
     constructor(props) {
-        console.log("constructor")
+
         super(props);
         this.state = {
             needLoad: true,
@@ -37,7 +37,6 @@ export default class FeatureScreen extends Component {
     }
     
     async UNSAFE_componentWillMount() {  
-        console.log("will mount")
         config.params.location = this.props.navigation.getParam('location')
           
         if (this.state.needLoad){ 
@@ -59,7 +58,7 @@ export default class FeatureScreen extends Component {
 
 
     render() {
-        console.log("rendered")
+
         var {navigate} = this.props.navigation;
         return (
             <ImageBackground 
@@ -68,41 +67,47 @@ export default class FeatureScreen extends Component {
             >
             <View style={styles.container}>
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-                    <View style = {{width: 300, height: 70, marginTop: 100, backgroundColor:'white', borderRadius: 5}}>
-                        <TouchableOpacity 
+                    <TouchableOpacity 
                         onPress={ () => navigate('Restaurant', {data: this.state.data, type:"default"})}
                         >
+                    <View style = {{width: 300, height: 70, marginTop: 100, backgroundColor:'white', borderRadius: 5}}>
+                        
                             
                             <Text style={styles.text}>
                                 <FontAwesomeIcon icon = {faStreetView}/>
                                 Nearby Restaurant
                             </Text>
-                        </TouchableOpacity>
+                        
                     </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-                    <View style = {{width: 300, height: 70, marginTop: 50, backgroundColor:'white', borderRadius: 5}}>
-                        <TouchableOpacity 
-                        onPress={ () => navigate('PickForMe', {data: this.state.data})}
-                        >
-                            <Text style={styles.text}>
-                                <FontAwesomeIcon icon = {faDice}/>
-                                Pick For Me
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity 
+                            onPress={ () => navigate('PickForMe', {data: this.state.data})}
+                            >
+                        <View style = {{width: 300, height: 70, marginTop: 50, backgroundColor:'white', borderRadius: 5}}>
+                            
+                                <Text style={styles.text}>
+                                    <FontAwesomeIcon icon = {faDice}/>
+                                    Pick For Me
+                                </Text>
+                            
+                        </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-                    <View style = {{width: 300, height: 70, marginTop: 50, backgroundColor:'white', borderRadius: 5}}>
-                        <TouchableOpacity 
+                    <TouchableOpacity 
                         onPress={ () => navigate('Budget', {data: this.state.data})}
                         >
-                            <Text style={styles.text}>
-                                <FontAwesomeIcon icon = {faDollarSign}/>
-                                Pick My Budget
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
+                        <View style = {{width: 300, height: 70, marginTop: 50, backgroundColor:'white', borderRadius: 5}}>
+                            
+                                <Text style={styles.text}>
+                                    <FontAwesomeIcon icon = {faDollarSign}/>
+                                    Pick My Budget
+                                </Text>
+                            
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
             </ImageBackground>

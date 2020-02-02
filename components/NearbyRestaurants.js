@@ -18,28 +18,17 @@ import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { faYelp } from '@fortawesome/free-brands-svg-icons'
 import { ScrollView } from 'react-native-gesture-handler';
 
+
 export default class NearbyScreen extends Component {
     render() {
         const data = this.props.navigation.getParam('data')
-        var type = this.props.navigation.getParam('type')
-        var exec = ''
-        var dropdown = ''
-        if (type == 'default'){
-            exec = data
-        } else if (type == 'sort_distance'){
-            data.sort((a, b) => a.distance > b.distance ? 1 : -1)
-            exec = data
-        }  else if (type == 'sort_price_low'){
-            data.sort(price_low_to_high)
-            exec = data
-        }  else if (type == 'sort_price_high'){
-            data.sort(price_high_to_low)
-            exec = data
-        }  else if (type == 'sort_rating'){
-            data.sort((a, b) => a.rating < b.rating ? 1 : -1)
-            exec = data
-        } 
-        var {navigate} = this.props.navigation;
+        let type = this.props.navigation.getParam('type')
+        let exec = ''
+        let dropdown = ''
+        
+        exec = sorting_attr(type, data)
+        
+        let {navigate} = this.props.navigation;
         return (
             
             <ImageBackground 
@@ -66,14 +55,14 @@ export default class NearbyScreen extends Component {
                         <Picker.Item label="Price: High to Low" value="sort_price_high" />
                         <Picker.Item label="Rating: High to Low" value="sort_rating" />
                     </Picker>
-                    {display_data(exec)}
+                    {display_data(exec, navigate)}
                 </View>
             </ImageBackground>
         );
     }
 }
 
-function display_data(data){
+function display_data(data, navigate){
     // List restaurant using list item
     if (data.length == 0){
         return (
@@ -88,7 +77,9 @@ function display_data(data){
                 <View>
                     {
                         data.map((l, i) =>
-                        <ListItem 
+                        
+                
+                        <ListItem onPress={ () => navigate('Product', {data: l})}
                             key = {i}
                             title = {<Text style = {{fontSize: 14}}>{l.name}</Text>}
                             subtitle = {l.location.address1 + "\n" + l.location.city 
@@ -106,9 +97,11 @@ function display_data(data){
                         
                             bottomDivider
                         />
+
                         )
 
                     }
+
                 </View>
                 </ScrollView>
     )
@@ -121,6 +114,23 @@ function round_miles(num){
 
 }
 
+function sorting_attr(type, data){
+    if (type == 'default'){
+        return data
+    } else if (type == 'sort_distance'){
+        data.sort((a, b) => a.distance > b.distance ? 1 : -1)
+        return data
+    }  else if (type == 'sort_price_low'){
+        data.sort(price_low_to_high)
+        return data
+    }  else if (type == 'sort_price_high'){
+        data.sort(price_high_to_low)
+        return data
+    }  else if (type == 'sort_rating'){
+        data.sort((a, b) => a.rating < b.rating ? 1 : -1)
+        return data
+    } 
+}
 
 function display(val) {
     if (val >= 4.8 ){
