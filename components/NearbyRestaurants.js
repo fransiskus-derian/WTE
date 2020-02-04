@@ -31,7 +31,7 @@ export default class NearbyScreen extends Component {
         return (
             
             <ImageBackground 
-                source={require('../images/background.png')}
+                source={require('../images/background2.png')}
                 style={styles.backgroundImage}
             >
                 <View style = {{top: 10, left: 10, width: '25%', borderRadius: 10, backgroundColor: 'white'}}>

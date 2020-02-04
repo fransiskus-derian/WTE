@@ -25,7 +25,7 @@ export default class PickForMeScreen extends Component {
         var {navigate} = this.props.navigation;
         return (
             <ImageBackground 
-                source={require('../images/background_plain.png')}
+                source={require('../images/background_upper2.png')}
                 style={styles.backgroundImage}
             >
                 <View style = {{top: 10, left: 10, width: '25%', borderRadius: 10, backgroundColor: 'white'}}>

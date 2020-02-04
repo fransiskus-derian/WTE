@@ -21,7 +21,7 @@ export default class MainScreen extends Component {
         return (
             
             <ImageBackground 
-                source={require('../images/background.png')}
+                source={require('../images/background2.png')}
                 style={styles.backgroundImage}
             >
                 <View style={styles.title}>
@@ -139,19 +139,19 @@ const styles = StyleSheet.create({
 
     title: {
         backgroundColor: 'white',
-        width: '95%',
+        width: '99%',
         height: '25%',
         alignSelf: 'center',
-        borderRadius: 20,
-        marginTop: 20
+        borderRadius: 10,
+        marginTop: 2
     },
 
     container: {
-        width: '95%',
-        height: '60%',
+        width: '99%',
+        height: '66%',
         alignSelf: 'center',
         backgroundColor: 'white',
-        marginTop: 10,
+        marginTop: 2,
         borderRadius: 10
     },
 

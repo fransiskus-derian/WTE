@@ -13,7 +13,7 @@ import { TextInput } from 'react-native-paper';
 
 export default class MainScreen extends Component {
     state = {
-        input_text: ''
+        input_text: '',
     }
 
     render() {
@@ -21,14 +21,16 @@ export default class MainScreen extends Component {
         return (
             
             <ImageBackground 
-                source={require('../images/home.png')}
+                source={require('../images/home2.png')}
                 style={styles.backgroundImage}
             >
             <KeyboardAvoidingView
             style = {{flex: 1}}
             behavior="position"
             >
-            <View style = {styles.input_box}>
+
+            <View style={styles.container}>
+                <View style = {styles.input_box}>
                     <TextInput 
                         label = 'Input Location'
                         placeholder='e.g. Western Blvd, corvallis OR' 
@@ -38,9 +40,7 @@ export default class MainScreen extends Component {
                 </View>
             
 
-            <View style={styles.container}>  
-                
-                <View style = {{width: 200, height: 40, backgroundColor:'white', borderRadius: 20}}>
+                <View style = {{marginTop: '20%', width:'50%', height: 40, backgroundColor:'white', borderRadius: 30}}>
                 
                 
                 <TouchableOpacity 
@@ -77,18 +77,13 @@ const styles = StyleSheet.create({
     },
 
     container: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'flex-end',
-        
-        bottom: -50
+        marginTop: '99%',
+        alignItems: 'center'
     },
     input_box: {
-        width: 200,
-        height: 60,
-        marginTop: 350,
-        alignSelf: 'center'
+        width: '60%',
+        height: '30%',
+        
     }
 });
 

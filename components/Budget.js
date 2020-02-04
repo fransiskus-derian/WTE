@@ -23,12 +23,12 @@ export default class BudgetScreen extends Component {
         var {navigate} = this.props.navigation;
         return (
             <ImageBackground 
-                source={require('../images/background.png')}
+                source={require('../images/background_saving2.png')}
                 style={styles.backgroundImage}
             >
 <View style={styles.container}>
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-                    <View style = {{width: 300, height: 70, marginTop: 100, backgroundColor:'white', borderRadius: 5}}>
+                    <View style = {{width: 250, height: 70, marginTop: 100, backgroundColor:'white', borderRadius: 5}}>
                         <TouchableOpacity 
                         onPress={ () => navigate('PickForMe', {data: data_price1})}
                         >
@@ -40,7 +40,7 @@ export default class BudgetScreen extends Component {
                     </View>
                 </View>
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-                    <View style = {{width: 300, height: 70, marginTop: 25, backgroundColor:'white', borderRadius: 5}}>
+                    <View style = {{width: 250, height: 70, marginTop: 25, backgroundColor:'white', borderRadius: 5}}>
                         <TouchableOpacity 
                         onPress={ () => navigate('PickForMe', {data: data_price2})}
                         >
@@ -52,7 +52,7 @@ export default class BudgetScreen extends Component {
                     </View>
                 </View>
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-                    <View style = {{width: 300, height: 70, marginTop: 25, backgroundColor:'white', borderRadius: 5}}>
+                    <View style = {{width: 250, height: 70, marginTop: 25, backgroundColor:'white', borderRadius: 5}}>
                         <TouchableOpacity 
                         onPress={ () => navigate('PickForMe', {data: data_price3})}
                         >
@@ -64,7 +64,7 @@ export default class BudgetScreen extends Component {
                     </View>
                 </View>
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-                    <View style = {{width: 300, height: 70, marginTop: 25, backgroundColor:'white', borderRadius: 5}}>
+                    <View style = {{width: 250, height: 70, marginTop: 25, backgroundColor:'white', borderRadius: 5}}>
                         <TouchableOpacity 
                         onPress={ () => navigate('PickForMe', {data: data_price4})}
                         >
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     },
 
         container: {
+        top: '-10%',
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',

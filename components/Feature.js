@@ -14,13 +14,14 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faThumbsUp, faDice, faStreetView, faDollarSign } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
+import { ActivityIndicator } from 'react-native-paper';
  
 const config = {
     headers: {'Authorization': 'Bearer tXL1wN1Q0HWhfFmFKVz8npvGAvpP9FTrkCV00J0m9IGMLKNVwQe1tPDsR7Xmo5ucY4zF1PX7iDzIynF23l0Pav365ZTOunSLP0NxMYKysYjbeNeRYYi4Ykg6mB4dXnYx'},
     params: {
       location: "corvallis", //defaulted to corvallis
-      limit: 30,
-      //sort_by: 'distance',
+      limit: 50,
+      sort_by: 'distance',
       open_now: false
     }
   };
@@ -59,10 +60,25 @@ export default class FeatureScreen extends Component {
 
     render() {
 
+        if(this.state.needLoad){
+            return (
+            <ImageBackground 
+                source={require('../images/background2.png')}
+                style={styles.backgroundImage}
+            >
+            <View style={styles.loading}>
+                <ActivityIndicator size="large" color="#00ff00" />
+                <Text style={styles.loading_text}>Locating</Text>
+                <Text style={styles.loading_text}>Place to Eat..</Text>
+            </View>
+            
+            </ImageBackground>
+            )
+        }
         var {navigate} = this.props.navigation;
         return (
             <ImageBackground 
-                source={require('../images/background.png')}
+                source={require('../images/background_upper2.png')}
                 style={styles.backgroundImage}
             >
             <View style={styles.container}>
@@ -136,6 +152,17 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         marginBottom: 100
+    },
+
+    loading_text: {
+        fontSize: 30,
+        fontFamily: 'georgia',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: 'white'
+    },
+    loading: {
+        marginTop: '50%',
+        textAlign: 'center'
     }
 });
-
