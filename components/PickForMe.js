@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Platform,
+
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Button,
   ImageBackground,
   TouchableOpacity,
-  Image
+  Image,
+  Dimensions
 
 } from 'react-native';
 
@@ -28,7 +27,7 @@ export default class PickForMeScreen extends Component {
                 source={require('../images/background_upper2.png')}
                 style={styles.backgroundImage}
             >
-                <View style = {{top: 10, left: 10, width: '25%', borderRadius: 10, backgroundColor: 'white'}}>
+                <View style = {styles.home}>
                     <TouchableOpacity onPress={ () => navigate('Home')}>
                         <Text style = {{fontSize: 20, textAlign: 'center'}}>
                             <FontAwesomeIcon icon = {faHome} />
@@ -171,16 +170,17 @@ const styles = StyleSheet.create({
     },
 
     title: {
-        width: 230, 
-        height: 60, 
+        width: Dimensions.get('window').width*0.7, 
+        height: Dimensions.get('window').height*0.1, 
         backgroundColor:'white', 
         borderRadius: 5,
         alignSelf: 'center',
-        marginTop: 30
+        marginTop: Dimensions.get('window').height*0.03
     },
 
     custom_list: {
-        marginTop: 20,
+        top: Dimensions.get('window').height*0.04,
+        height: Dimensions.get('window').height*0.7
     },
 
     not_found: {
@@ -192,7 +192,14 @@ const styles = StyleSheet.create({
     },
     
     title_not_found: {
-        top: 150,
+        top: Dimensions.get('window').height*0.25,
+    }, 
+    home: {
+        top: Dimensions.get('window').height*0.01, 
+        left: 10, 
+        width: '25%', 
+        borderRadius: 10, 
+        backgroundColor: 'white'
     }
 
 

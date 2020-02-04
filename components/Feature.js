@@ -7,7 +7,9 @@ import {
   TextInput,
   Button,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  Dimensions,
+  Alert
 
 } from 'react-native';
 
@@ -59,7 +61,29 @@ export default class FeatureScreen extends Component {
 
 
     render() {
-
+        var {navigate} = this.props.navigation;
+        if(this.state.needLoad && this.props.navigation.getParam('location') == ''){
+            return (
+                <ImageBackground 
+                    source={require('../images/background2.png')}
+                    style={styles.backgroundImage}
+                >
+                <View style={styles.loading}>
+                    <Text style={styles.loading_text}>LOCATION</Text>
+                    <Text style={styles.loading_text}>NOT FOUND</Text>
+                    {Alert.alert(
+                        'Invalid location',
+                        'Please check your input location',
+                        [
+                            {text: 'OK', onPress: () => navigate('Home')}
+                        ]
+                    )}
+                    
+                </View>
+                
+                </ImageBackground>
+                )
+        }
         if(this.state.needLoad){
             return (
             <ImageBackground 
@@ -75,7 +99,7 @@ export default class FeatureScreen extends Component {
             </ImageBackground>
             )
         }
-        var {navigate} = this.props.navigation;
+        
         return (
             <ImageBackground 
                 source={require('../images/background_upper2.png')}
@@ -86,7 +110,7 @@ export default class FeatureScreen extends Component {
                     <TouchableOpacity 
                         onPress={ () => navigate('Restaurant', {data: this.state.data, type:"default"})}
                         >
-                    <View style = {{width: 300, height: 70, marginTop: 100, backgroundColor:'white', borderRadius: 5}}>
+                    <View style = {styles.options}>
                         
                             
                             <Text style={styles.text}>
@@ -101,7 +125,7 @@ export default class FeatureScreen extends Component {
                     <TouchableOpacity 
                             onPress={ () => navigate('PickForMe', {data: this.state.data})}
                             >
-                        <View style = {{width: 300, height: 70, marginTop: 50, backgroundColor:'white', borderRadius: 5}}>
+                        <View style = {styles.options2}>
                             
                                 <Text style={styles.text}>
                                     <FontAwesomeIcon icon = {faDice}/>
@@ -115,7 +139,7 @@ export default class FeatureScreen extends Component {
                     <TouchableOpacity 
                         onPress={ () => navigate('Budget', {data: this.state.data})}
                         >
-                        <View style = {{width: 300, height: 70, marginTop: 50, backgroundColor:'white', borderRadius: 5}}>
+                        <View style = {styles.options2}>
                             
                                 <Text style={styles.text}>
                                     <FontAwesomeIcon icon = {faDollarSign}/>
@@ -151,7 +175,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
-        marginBottom: 100
+        
     },
 
     loading_text: {
@@ -162,7 +186,22 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     loading: {
-        marginTop: '50%',
+        marginTop: Dimensions.get('window').height*0.3,
         textAlign: 'center'
+    },
+
+    options: {
+        width: Dimensions.get('window').width*0.9, 
+        height: Dimensions.get('window').height*0.12,  
+        marginTop: Dimensions.get('window').height*0.2, 
+        backgroundColor:'white', 
+        borderRadius: 5
+    },
+    options2: {
+        width: Dimensions.get('window').width*0.9, 
+        height: Dimensions.get('window').height*0.12, 
+        marginTop: Dimensions.get('window').height*0.05, 
+        backgroundColor:'white', 
+        borderRadius: 5
     }
 });

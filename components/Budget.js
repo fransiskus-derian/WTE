@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Platform,
+  Dimensions,
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Button,
   ImageBackground,
   TouchableOpacity
 
@@ -28,7 +26,7 @@ export default class BudgetScreen extends Component {
             >
 <View style={styles.container}>
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-                    <View style = {{width: 250, height: 70, marginTop: 100, backgroundColor:'white', borderRadius: 5}}>
+                    <View style = {styles.options}>
                         <TouchableOpacity 
                         onPress={ () => navigate('PickForMe', {data: data_price1})}
                         >
@@ -40,7 +38,7 @@ export default class BudgetScreen extends Component {
                     </View>
                 </View>
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-                    <View style = {{width: 250, height: 70, marginTop: 25, backgroundColor:'white', borderRadius: 5}}>
+                    <View style = {styles.options}>
                         <TouchableOpacity 
                         onPress={ () => navigate('PickForMe', {data: data_price2})}
                         >
@@ -52,19 +50,18 @@ export default class BudgetScreen extends Component {
                     </View>
                 </View>
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-                    <View style = {{width: 250, height: 70, marginTop: 25, backgroundColor:'white', borderRadius: 5}}>
+                    <View style = {styles.options}>
                         <TouchableOpacity 
                         onPress={ () => navigate('PickForMe', {data: data_price3})}
                         >
-                            <Text style={styles.text}>
-                                
+                            <Text style={styles.text}>             
                                 $$$
                             </Text>
                         </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-                    <View style = {{width: 250, height: 70, marginTop: 25, backgroundColor:'white', borderRadius: 5}}>
+                    <View style = {styles.options}>
                         <TouchableOpacity 
                         onPress={ () => navigate('PickForMe', {data: data_price4})}
                         >
@@ -105,15 +102,21 @@ const styles = StyleSheet.create({
         color: 'black',
         backgroundColor: 'rgba(0,0,0,0)',
         fontSize: 24,
-        marginTop: 17,
+        marginTop: Dimensions.get('window').height*0.03,
     },
 
         container: {
-        top: '-10%',
+        top: Dimensions.get('window').height*0.04,
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         marginBottom: 0
+    }, options: {
+        width: Dimensions.get('window').width*0.7, 
+        height: Dimensions.get('window').height*0.115, 
+        marginTop: Dimensions.get('window').height*0.043, 
+        backgroundColor:'white', 
+        borderRadius: 5
     }
 
 });

@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   ImageBackground,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
@@ -40,7 +41,7 @@ export default class MainScreen extends Component {
                 </View>
             
 
-                <View style = {{marginTop: '20%', width:'50%', height: 40, backgroundColor:'white', borderRadius: 30}}>
+                <View style = {{marginTop: '12%', width:'50%', height: 40, backgroundColor:'white', borderRadius: 30}}>
                 
                 
                 <TouchableOpacity 
@@ -77,12 +78,13 @@ const styles = StyleSheet.create({
     },
 
     container: {
-        marginTop: '99%',
+        //marginTop: '99%',
+        marginTop: Dimensions.get('window').height * 0.6,
         alignItems: 'center'
     },
     input_box: {
-        width: '60%',
-        height: '30%',
+        width: Dimensions.get('window').width * 0.55,
+        height: Dimensions.get('window').height * 0.05,
         
     }
 });
