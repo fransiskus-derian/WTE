@@ -10,7 +10,7 @@ Programming Language: JavaScript
 API: Yelp - API
 
 Note:
-- update components/Feature.js -> update yelp-api key
+- Update components/Feature.js -> update yelp-api key
 
 How to run:
 - Follow installation instruction on React-Native website
