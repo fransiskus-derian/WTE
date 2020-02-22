@@ -8,7 +8,11 @@ import {
   ImageBackground,
   TouchableOpacity,
   Dimensions,
+  Alert,
 } from 'react-native';
+
+import NetInfo from "@react-native-community/netinfo";
+
 import { TextInput } from 'react-native-paper';
 
 
@@ -17,7 +21,21 @@ export default class MainScreen extends Component {
         input_text: '',
     }
 
+
+
     render() {
+        NetInfo.fetch().then(state => {
+            console.log(state.isConnected)
+            if(!state.isConnected){
+                Alert.alert(
+                    'No Internet Connection!',
+                    'Please check your wifi or cellular network',
+                    [
+                        {text: 'OK', onPress: () => navigate('Home')}
+                    ]
+                )
+            }
+        });
         var {navigate} = this.props.navigation;
         return (
             
@@ -41,7 +59,7 @@ export default class MainScreen extends Component {
                 </View>
             
 
-                <View style = {{marginTop: '12%', width:'50%', height: 40, backgroundColor:'white', borderRadius: 30}}>
+                <View style = {{marginTop: '10%', width:'50%', height: 40, backgroundColor:'white', borderRadius: 30}}>
                 
                 
                 <TouchableOpacity 
@@ -79,7 +97,7 @@ const styles = StyleSheet.create({
 
     container: {
         //marginTop: '99%',
-        marginTop: Dimensions.get('window').height * 0.6,
+        marginTop: Dimensions.get('window').height * 0.65,
         alignItems: 'center'
     },
     input_box: {

@@ -13,13 +13,15 @@ import {
 
 } from 'react-native';
 
+import NetInfo from "@react-native-community/netinfo";
+
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faThumbsUp, faDice, faStreetView, faDollarSign } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import { ActivityIndicator } from 'react-native-paper';
  
 const config = {
-    headers: {'Authorization': 'Bearer tXL1wN1Q0HWhfFmFKVz8npvGAvpP9FTrkCV00J0m9IGMLKNVwQe1tPDsR7Xmo5ucY4zF1PX7iDzIynF23l0Pav365ZTOunSLP0NxMYKysYjbeNeRYYi4Ykg6mB4dXnYx'},
+    headers: {'Authorization': 'Bearer {API-KEY}'},
     params: {
       location: "corvallis", //defaulted to corvallis
       limit: 50,
@@ -61,6 +63,18 @@ export default class FeatureScreen extends Component {
 
 
     render() {
+        NetInfo.fetch().then(state => {
+            console.log(state.isConnected)
+            if(!state.isConnected){
+                Alert.alert(
+                    'No Internet Connection!',
+                    'Please check your wifi or cellular network',
+                    [
+                        {text: 'OK', onPress: () => navigate('Home')}
+                    ]
+                )
+            }
+        });
         var {navigate} = this.props.navigation;
         if(this.state.needLoad && this.props.navigation.getParam('location') == ''){
             return (
@@ -168,7 +182,7 @@ const styles = StyleSheet.create({
         color: 'black',
         backgroundColor: 'rgba(0,0,0,0)',
         fontSize: 24,
-        marginTop: 17,
+        marginTop: Dimensions.get('window').height*0.032,
     },
 
         container: {
